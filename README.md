@@ -173,5 +173,78 @@ output "ec2_public_ip" {
 }
 
 ```
+### Step9: Connect Modules
+
+Now, go to the root layer, in this case is:
+
+```
+cd aws-data-engineering
+```
+This is typically the folder containing the subfolder modules.
+In it, create _main.tf_ if it doesn't exist and add:
+
+```
+module "vpc" {
+  source       = "./module-03-vpc-terraform"
+  vpc_cidr     = var.vpc_cidr
+  project_name = var.project_name
+}
+
+module "s3" {
+  source       = "./module-04-s3-terraform"
+  project_name = var.project_name
+}
+
+module "iam" {
+  source          = "./module-02-iam-terraform"
+  raw_bucket_name = module.s3.raw_bucket_name
+  project_name    = var.project_name
+}
+
+module "ec2" {
+  source               = "./module-05-ec2-terraform"
+  vpc_id               = module.vpc.vpc_id
+  public_subnet_id     = module.vpc.public_subnet_id
+  iam_instance_profile = module.iam.ec2_instance_profile
+  project_name         = var.project_name
+}
+
+```
+
+Add variables.tf
+
+```
+variable "project_name" {
+  description = "Name of the project"
+  type        = string
+}
+
+variable "vpc_cidr" {
+  description = "CIDR block for the VPC"
+  type        = string
+}
+
+```
+
+Add terraform.tfvars
+
+```
+project_name = "aws-data-engineering-kevins"
+vpc_cidr     = "10.0.0.0/16"
+
+```
+
+
+
+### Step 10: Run Terraform
+
+Start by Validating
+
+```
+terraform validate
+```
+By running that, you are likely to run into errors. Let's see how you debug. I've debugged mine.
+
+Note that I am new to terraform. Also, vpc is not found in s3.
 
 
