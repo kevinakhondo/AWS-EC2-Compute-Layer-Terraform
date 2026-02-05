@@ -20,12 +20,23 @@ EC2
 The structure of the folder is
 
 ```
-aws-data-engineering/module-04-ec2-terraform/
+aws-data-engineering/module-05-ec2-terraform/
 ├── main.tf
 ├── variables.tf
 ├── outputs.tf
 └── user_data.sh
 
+```
+
+## Hands On
+### Step 1: Create Folder
+
+In your terminal, create the following folder
+
+```
+cd aws-data-engineering
+mkdir -p module-05-ec2-terraform
+cd module-05-ec2-terraform
 ```
 
 
