@@ -38,5 +38,37 @@ cd aws-data-engineering
 mkdir -p module-05-ec2-terraform
 cd module-05-ec2-terraform
 ```
+### Step 2: Create variables.tf
+By creating this, we are connecting the EC2 to earlier modules we've done on the previous resipositories.
+In your VS, open the created folder and create _variables.tf_ file.
+Add the following:
+
+```
+variable "aws_region" {
+  type    = string
+  default = "us-east-1"
+}
+
+variable "project_name" {
+  type = string
+}
+
+variable "public_subnet_id" {
+  description = "Public subnet ID from VPC module"
+  type        = string
+}
+
+variable "ec2_role_name" {
+  description = "IAM role name for EC2"
+  type        = string
+}
+
+```
+
+
+
+
+
+
 
 
