@@ -17,3 +17,15 @@ EC2
  └── Data access: S3 via IAM (no secrets)
 
 ```
+The structure of the folder is
+
+```
+aws-data-engineering/module-04-ec2-terraform/
+├── main.tf
+├── variables.tf
+├── outputs.tf
+└── user_data.sh
+
+```
+
+
